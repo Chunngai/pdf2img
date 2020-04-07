@@ -6,9 +6,10 @@ import argparse
 from pdf2image import convert_from_path
 
 
-def pdf2img(pdf_path, output_folder, output_file_name, format_):
+def pdf2img(pdf_path, output_folder, format_):
     print(f"converting {pdf_path} to {format_} images")
 
+    output_file_name = f"{os.path.basename(pdf_path)}"
     convert_from_path(pdf_path, output_folder=output_folder,
                       output_file=output_file_name, fmt=format_,
                       thread_count=6)
@@ -34,8 +35,6 @@ def validate_dir(dir_input):
 
 
 if __name__ == '__main__':
-    pdf_path = "/home/neko/Downloads/LinuxProbe.pdf"
-
     err_msg = "pdf2img.py: error: "
 
     parser = argparse.ArgumentParser(
@@ -54,5 +53,4 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    pdf2img(args.pdf_path, args.output_folder, args.output_file_name,
-            args.format)
+    pdf2img(args.pdf_path, args.output_folder, args.format)
